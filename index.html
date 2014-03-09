@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Mac-Slow Clock</title> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+	var baseurl = window.location.href.substring(0,window.location.href.lastIndexOf("/"));
+	
+	$(document).ready(function(){
+	    for(i=1;i<20;i++){
+		    $("#clocks").append(replaceAll("#{i}",i,$("#clock-template").html()));
+			
+		    $('#clock'+i+'-url').val('<object data="'+baseurl+'/clock'+i+'.svg?w=3&amp;h=3" id="clock1" type="image/svg+xml"></object>').attr('size','128');
+			$( "#clock"+i+"-width" ).spinner({
+				change: function( event, ui ) {
+				  resize($(this).attr("id"));
+				},
+				stop: function( event, ui ) {
+				  resize($(this).attr("id"));
+				}
+			});
+			$( "#clock"+i+"-height" ).spinner({
+				change: function( event, ui ) {
+				  resize($(this).attr("id"));
+				},
+				stop: function( event, ui ) {
+				  resize($(this).attr("id"));
+				}
+			});			
+		}
+		$(".down_arrow").button({
+			 icons: {
+				primary: "ui-icon-triangle-1-s"
+			},
+			text: false		
+		});
+		
+		$(".up_arrow").button({
+			 icons: {
+				primary: "ui-icon-triangle-1-n"
+			},
+			text: false		
+		});		
+	});
+
+
+    
+	
+	function resize(id){
+	  var cid = id.split("-")[0];
+	  
+	  var w = $('#'+cid+"-width").spinner("value");
+	  var h = $('#'+cid+"-height").spinner("value");
+	  var url = baseurl+"/"+cid+'.svg?w='+w+'&amp;h='+h;
+	  
+	  $('#'+cid+'-url').val('<object data="'+url+'" id="'+cid+'" type="image/svg+xml"></object>');
+	  
+	  //$('#clock'+id).attr("data",url);
+	  $('#'+cid+'-holder').html('<object data="'+url+'" id="'+cid+'" type="image/svg+xml"></object>');	  
+	}
+	function replaceAll(find, replace, str) {
+	  return str.replace(new RegExp(find, 'g'), replace);
+	}
+    </script>
+    <style type="text/css">
+	
+    </style>
+  </head>
+  <body style="background-image:url(matrix.jpg);background-repeat: repeat-y;background-position:right">
+	<h1>Web port of <a href="http://macslow.thepimp.net/?page_id=23" target="new window">macslow</a> clocks, demonstrates usage of SVG.</h1>
+
+
+	download <a href="dist.zip">code</a><br/>
+
+	<div id="clocks">
+	
+	</div>
+ 
+ 
+   <div id="clock-template" style="display:none">
+    <div id='clock#{i}-holder'>
+      <object data="clock#{i}.svg?w=3&h=3" id="clock#{i}" type="image/svg+xml"></object>
+   </div>
+   <div style="width:30%">
+   <fieldset>
+     <legend>Resize Clock</legend>
+	 <input type="text"  size="2" id="clock#{i}-width" value="3"/> X <input type="text" size="2" id="clock#{i}-height" value="3"/>
+   </fieldset>
+	<span>embed code:</span><br/> 
+	<textarea id="clock#{i}-url"></textarea>
+   </div>
+   </div>
+ 
+  </body>
+</html>
+ 
