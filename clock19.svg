@@ -54,8 +54,8 @@
 			var tDate = new Date();
 			
 
-			//smooth-out the rotation of the hour hand: rotate 0.008333333 of a degree every second
-			hour_rotate_angle = ((30*tDate.getHours())-90)+(0.008333333*((tDate.getMinutes()*60)+tDate.getSeconds()));
+			//smooth-out the rotation of the hour hand: rotate 0.004166666 of a degree every second
+			hour_rotate_angle = (0.004166666*((tDate.getHours()*3600)+(tDate.getMinutes()*60)+tDate.getSeconds()));
 			hour_hand.setAttribute(&quot;transform&quot;, &quot;rotate(&quot;+hour_rotate_angle+&quot;,50,50)&quot;);
 			hour_hand_shadow.setAttribute(&quot;transform&quot;, &quot;rotate(&quot;+hour_rotate_angle+&quot;,50,50)&quot;);
 		}
@@ -88,8 +88,8 @@
 			hour_hand_shadow   = document.getElementById('layer-clock-hour-hand-shadow');
 			
 
-			//smooth-out the rotation of the hour hand: rotate 0.008333333 of a degree every second
-			hour_rotate_angle = ((30*tDate.getHours())-90)+(0.008333333*((tDate.getMinutes()*60)+tDate.getSeconds()));
+			//smooth-out the rotation of the hour hand: rotate 0.004166666 of a degree every second
+			hour_rotate_angle = (0.004166666*((tDate.getHours()*3600)+(tDate.getMinutes()*60)+tDate.getSeconds()));
 			hour_hand.setAttribute(&quot;transform&quot;, &quot;rotate(&quot;+hour_rotate_angle+&quot;,50,50)&quot;);
 			hour_hand_shadow.setAttribute(&quot;transform&quot;, &quot;rotate(&quot;+hour_rotate_angle+&quot;,50,50)&quot;);
 
